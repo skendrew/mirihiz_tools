@@ -25,7 +25,7 @@ The test_data/ directory contains test files that can be used to test the code.
 From the shell command line:
 
 ```
->> python make_regions.py test_data/sextractor_catalog_example.cat sextractor ds9test.reg
+>> python make_regions.py test_data/test_data_xtrac.cat sextractor ds9test.reg
 
 ````
 
