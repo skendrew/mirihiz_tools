@@ -3,7 +3,7 @@
 
 ## What's in this repository
 
-The repository contains a few tools for interacting with MIRISim simulations and analysis performed on them for the high-z GTO science team for MIRI. 
+The repository contains a few tools for interacting with MIRISim simulations and analysis performed on them. 
 
 ## Dependencies
 
@@ -34,7 +34,14 @@ From an interactive python session:
 ```
 In [2]: from make_regions import make_regions
 
-In [3]: x = make_regions(file='test_data/sextractor_catalog_example.cat', filetype='sextractor', outfile='ds9reg.reg')
+In [3]: x = make_regions(file='test_data/test_data_xtrac.cat', filetype='sextractor', outfile='ds9reg.reg')
 
 ```
 
+## Questions or requests
+
+Post an issue or email me.
+
+## Author
+
+S. Kendrew, May 2019 
