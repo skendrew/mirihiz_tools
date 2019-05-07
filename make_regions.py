@@ -32,13 +32,14 @@ def read_scene(infile=None):
     - infile: a .ini file containing the scene.
      
     '''
-    r = 10.
+    r = Angle(10., 'arcsec')
     sc = scenemaker(configfile=infile)
     coord_list = []
     for src in sc.sources:
         if hasattr(src, 'Cen'):
             x,y,name = src.Cen[0], src.Cen[1], src.name
-            reg = CirclePixelRegion(center=PixCoord(x=x, y=y), radius=r)
+            c = SkyCoord(x, y, unit='arcsec')
+            reg = CircleSkyRegion(c, r)
             coord_list.append(reg)
 
     return coord_list
@@ -89,15 +90,18 @@ def make_regions(file=None, filetype=None, outfile='ds9.reg'):
     
     if (filetype=='sextractor'):
         reg_list = read_sextractor(infile=file)
+        # the list of regions can be written to a DG9 region file: 
+        write_ds9(reg_list, outfile, coordsys='physical')
     
     elif (filetype=='scene'):
         reg_list = read_scene(infile=file)
+        # the list of regions can be written to a DG9 region file: 
+        write_ds9(reg_list, outfile)
     
     else:
         raise IOError('Input filetype not recognised!')
         
-    # the list of regions can be written to a DG9 region file: 
-    write_ds9(reg_list, outfile, coordsys='physical')
+
 # adjust coordinates to get pixel (x,y) coordinates
 
 
