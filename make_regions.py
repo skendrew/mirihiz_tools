@@ -5,7 +5,7 @@ from astropy import units as u
 from astropy.coordinates import Angle, SkyCoord
 from regions import CircleSkyRegion, CirclePixelRegion, write_ds9, PixCoord
 
-
+from mirisim.skysim.builder import scenemaker
 
     # A description of what this file should do:
 
@@ -32,16 +32,16 @@ def read_scene(infile=None):
     - infile: a .ini file containing the scene.
      
     '''
-    cenlines = []
-    with open(infile, 'rt') as sf:
-        for sl in sf:
-            if 'Cen' in sl:
-                cenlines.append(sl.strip)
-    
-    
-    
-    
-    return 0
+    r = 10.
+    sc = scenemaker(configfile=infile)
+    coord_list = []
+    for src in sc.sources:
+        if hasattr(src, 'Cen'):
+            x,y,name = src.Cen[0], src.Cen[1], src.name
+            reg = CirclePixelRegion(center=PixCoord(x=x, y=y), radius=r)
+            coord_list.append(reg)
+
+    return coord_list
     
 #=============================================================================
 
